@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+    wprg-www:
+        container_name: wprg-www
+        build: ./docker/www
+        volumes:
+            - ./public_html:/var/www/html
+        ports:
+            - "8088:80"
+#        links:
+#            - lipsum-redis
+#            - lipsum-pgsql
+        environment:
+            - XDEBUG_CONFIG="remote_enable=1 remote_mode=req remote_port=9000 remote_host=172.17.0.1 remote_connect_back=0"
+            - PHP_IDE_CONFIG="serverName=localhost"
+            - SYMFONY_ENV=dev
+            - INSTANCE_NAME=docker
+        hostname: wprg-www
+
